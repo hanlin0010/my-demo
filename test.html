@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_739578_4w4pk32grjs.css">
+</head>
+<style>
+body,ul, li {margin: 0; padding: 0; list-style: none;}
+.clear {clear: both;}
+.banner {width: 800px; height: 500px;margin: 0 auto;position: relative;}
+.banner .banner-box img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; 
+    left: 0;
+    margin: 0;
+    padding: 0;
+    transition:all .5s;
+    opacity: 0;
+    filter:Alpha(opacity=0);
+    transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    -webkit-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+}
+.banner .banner-box img.show {
+    filter:Alpha(opacity=100);
+    opacity: 1
+}
+.btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    line-height: 50px;
+    text-align: center;
+    margin-top: -25px;
+    background: rgba(0, 0, 0, .7);
+}
+.btn.left {
+    left: 0;
+}
+.btn.right {
+    right: 0;
+}
+.btn .iconfont {
+    color: #fff;
+}
+.indicator {
+    position: absolute;
+    bottom: 10px;
+    left:50%;
+    transform: translate(-50%, 0);
+    -moz-transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0)
+}
+.indicator li {
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background: rgba(13, 125, 255, 0.3);
+    float: left;
+}
+.indicator li.on {
+    background: rgba(13, 125, 255, 1);
+}
+.indicator li:nth-last-child(2) {
+    margin: 0;
+}
+</style>
+<body>
+<div class="banner">
+    <ul>
+        <li class="banner-box"><img src="./images/1.jpg" alt=""></li>
+        <li class="banner-box"><img src="./images/2.jpg" alt=""></li>
+        <li class="banner-box"><img src="./images/3.jpg" alt=""></li>
+        <li class="banner-box"><img src="./images/4.jpg" alt=""></li>
+        <li class="banner-box"><img src="./images/5.jpg" alt=""></li>
+    </ul>
+    <div class="btn left">
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="btn right">
+        <i class="iconfont icon-right"></i>
+    </div>
+    <ul class="indicator">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <div class="clear"></div>
+    </ul>
+</div>
+</body>
+<script>
+    var oImg = document.querySelectorAll('.banner-box img');
+    var oBtn = document.querySelectorAll('.btn');
+    var oIndicator = document.querySelectorAll('.indicator li');
+    var index = 0;
+    var length = oImg.length;
+    oImg[0].className = 'show';
+    oIndicator[0].className = 'on';
+    for (var i = 0; i < 2; i++) {
+        (function(){
+            if(i){
+                oBtn[i].onclick = function () {
+                    oImg[index].className = '';
+                    oIndicator[index].className = '';
+                    index++;
+                    index%=length;
+                    oImg[index].className = 'show';
+                    oIndicator[index].className = 'on';
+                }
+            } else {
+                oBtn[i].onclick = function () {
+                    oImg[index].className = '';
+                    oIndicator[index].className = '';
+                    index--;
+                    console.log(index);
+                    if (index < 0) index = length - 1;
+                    oImg[index].className = 'show';
+                    oIndicator[index].className = 'on';
+                }
+            }
+        })(i)
+    }
+
+</script>
+</html>
